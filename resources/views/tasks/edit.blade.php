@@ -11,6 +11,9 @@
         {!! Form::label('content', 'タスク:') !!}
         {!! Form::text('content') !!}
 
+        {!! Form::label('status', 'ステータス：') !!}
+        {!! Form::select('status', ['完了' => '完了済み', '作業中' => '作業中'], '作業中') !!}
+
         {!! Form::submit('更新') !!}
 
     {!! Form::close() !!}

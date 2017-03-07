@@ -12,7 +12,8 @@
             <?php
                 $idNum = 'ID番号：'.$task->id;
                 $taskContent = 'タスク：'.$task->content;
-                $title = $idNum.$taskContent;
+                $taskStatus = 'ステータス：'.$task->status;
+                $title = $idNum.$taskContent.$taskStatus;
             ?>
             <li>{!! link_to_route('tasks.show', $title, ['id' => $task->id]) !!}</li>
         @endforeach
