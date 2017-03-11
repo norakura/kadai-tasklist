@@ -18,8 +18,9 @@ class TasksController extends Controller
     public function index()
     {
         //役割：タスク一覧の表示
-        $tasks = Task::all();
-        
+        //$tasks = Task::all();
+        $tasks = Task::paginate(2);
+
         return View('tasks.index',[
             'tasks' => $tasks,
         ]);

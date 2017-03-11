@@ -6,16 +6,27 @@
 <!-- 役割：タスク詳細の表示 -->
 
     <h1>id = {{ $task->id }}のタスク詳細ページ</h1>
-    
-    <p>タスク：{{ $task->content }}</p>
-    <p>ステータス：{{ $task->status }}</p>
-    
-    {!! link_to_route('tasks.edit', 'このタスクを編集', ['id' => $task->id]) !!}
+    <table class="table table-bordered">
+        <tr>
+            <th>id</th>
+            <td>{{ $task->id }}</td>
+        </tr>
+        <tr>
+            <th>タスク</th>
+            <td>{{ $task->content }}</td>
+        </tr>
+        <tr>
+            <th>ステータス</th>
+            <td>{{ $task->status }}</td>
+        </tr>
+    </table>
+
+    {!! link_to_route('tasks.edit', 'このタスクを編集', ['id' => $task->id], ['class' => 'btn btn-default']) !!}
     
     {!! Form::model($task,['route'=> ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
-        {!! Form::submit('タスクを削除') !!}
+        {!! Form::submit('タスクを削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
     
-    {!! link_to_route('tasks.index', '一覧へ戻る') !!}
+    {!! link_to_route('tasks.index', '一覧へ戻る', null, ['class' => 'btn btn-link']) !!}
 
 @endsection
