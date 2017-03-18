@@ -13,17 +13,18 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     @if (Auth::check())
-                        <li><a href="#">Users</a></li>
+                        <?php $user = Auth::user(); ?>
+                        <?php /*<li> {!! link_to_route('users.index', 'ユーザー一覧') !!}</li> */?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} さん<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">My profile</a></li>
+                                <li>{!! link_to_route('users.show', 'Myプロフィール', ['id' => $user->id]) !!}</li>
+                                <li>{!! link_to_route('tasks.create', '新規タスクの投稿') !!}</li>
                                 <li role="separator" class="divider"></li>
                                 <li>{!! link_to_route('logout.get', 'Logout') !!}</li>
                             </ul>
                         </li>
                     @else
-                        <li>{!! link_to_route('tasks.create', '新規タスクの投稿') !!}</li>
                         <li>{!! link_to_route('signup.get', 'サインアップ') !!}</li>
                         <li>{!! link_to_route('login.get', 'ログイン') !!}</li>
                     @endif

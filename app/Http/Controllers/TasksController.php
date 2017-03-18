@@ -19,11 +19,17 @@ class TasksController extends Controller
     {
         //役割：タスク一覧の表示
         //$tasks = Task::all();
-        $tasks = Task::paginate(2);
-
-        return View('tasks.index',[
-            'tasks' => $tasks,
-        ]);
+        $data = [];
+        if(\Auth::check()){
+            $user = \Auth::user();
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(2);
+            
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+        }
+        return View('tasks.index',$data);
     }
 
     /**
@@ -55,10 +61,17 @@ class TasksController extends Controller
         ]);
 
         //役割：createから送信されるフォームを処理
+        /*
         $task = new Task;
         $task->content = $request->content;
         $task->status = $request->status;
         $task->save();
+        */
+        
+        $request->user()->tasks()->create([
+            'status' => $request->status,
+            'content' => $request->content,
+        ]);
         
         return redirect('/');
     }

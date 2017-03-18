@@ -26,6 +26,6 @@ Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
 //表示にログイン認証が必要なものをグルーピング
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController'/*, ['only' => ['index', 'show']]*/);
     Route::resource('tasks', 'TasksController');
 });
